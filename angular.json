@@ -4,9 +4,9 @@
   "newProjectRoot": "projects",
   "projects": {
     "keycloak-angular": {
+      "projectType": "library",
       "root": "projects/keycloak-angular",
       "sourceRoot": "projects/keycloak-angular/src",
-      "projectType": "library",
       "prefix": "ka",
       "architect": {
         "build": {
@@ -27,10 +27,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "projects/keycloak-angular/tsconfig.lib.json",
-              "projects/keycloak-angular/tsconfig.spec.json"
-            ],
+            "tsConfig": ["projects/keycloak-angular/tsconfig.lib.json", "projects/keycloak-angular/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

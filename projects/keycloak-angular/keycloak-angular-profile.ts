@@ -6,13 +6,8 @@
  * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
  */
 
-import { Injectable } from '@angular/core';
+import { Keycloak } from './src/lib/keycloak-js-exports';
 
-import { CoreModule } from '../core.module';
-
-@Injectable({
-  providedIn: CoreModule
-})
-export class KeycloakService {
-  constructor() {}
+export interface KeycloakAngularProfile extends Keycloak.KeycloakProfile {
+  attributes: any;
 }

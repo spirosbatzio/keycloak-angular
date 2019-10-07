@@ -6,13 +6,7 @@
  * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
  */
 
-import { Injectable } from '@angular/core';
+// Workaround for rollup library as pointed out on issue #1267 (https://github.com/rollup/rollup/issues/1267).
+import * as _Keycloak from 'keycloak-js';
 
-import { CoreModule } from '../core.module';
-
-@Injectable({
-  providedIn: CoreModule
-})
-export class KeycloakService {
-  constructor() {}
-}
+export const Keycloak = _Keycloak;

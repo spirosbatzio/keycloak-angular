@@ -6,17 +6,7 @@
  * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
  */
 
-/**
- * Credentials type. Should be used when The Access Type is configured as Confidential, as
- * mentioned in the keycloak's documentation:
- * http://www.keycloak.org/docs/latest/securing_apps/index.html#_configuring_a_client_for_use_with_client_registration_cli
- */
-export type Credentials = {
-  /**
-   * Secret or Signed JWT. Please, caution where you store this sensitive information!
-   */
-  secret: string;
-};
+import { Credentials } from './shared-types';
 
 /**
  * This is the interface containing the attributes for the keycloak configuration in case

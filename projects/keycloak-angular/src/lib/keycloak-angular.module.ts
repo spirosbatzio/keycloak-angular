@@ -6,37 +6,65 @@
  * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
  */
 
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 
-import { CoreModule } from './core/core.module';
-import { KeycloakOptions } from './core/models/keycloak-options';
-import { KeycloakConfig } from './core/services/keycloak-config.service';
+import { Keycloak } from './keycloak-js-exports';
+import { KEYCLOAK_ANGULAR_OPTIONS, KeycloakAngularOptions } from './core/models/keycloak-angular-options';
 
+/**
+ * @description
+ *
+ * TODO:
+ */
 @NgModule({
-  imports: [CoreModule]
+  declarations: [],
+  imports: [],
+  exports: []
 })
 export class KeycloakAngularModule {
-  static forRoot(options?: KeycloakOptions): ModuleWithProviders {
+  /**
+   * Creates and configures the keycloak angular module with...
+   *
+   * @param config An `KeycloakConfig` configuration object that contains initialization
+   * for keycloak-js adapter and keycloak-angular library.
+   * @return The new keycloak-angular module.
+   */
+  static forRoot(options: KeycloakAngularOptions): ModuleWithProviders<KeycloakAngularModule> {
     return {
       ngModule: KeycloakAngularModule,
       providers: [
-        {
-          provide: KeycloakConfig,
-          useFactory: options => new KeycloakConfig(options)
-        }
+        { provide: KEYCLOAK_ANGULAR_OPTIONS, useValue: options },
+        { provide: KEYCLOAK_INSTANCE, useValue: createKeycloakInstance(options) }
       ]
     };
   }
+  /**
+   * Creates and configures the keycloak angular module with...
+   *
+   * @param config An `KeycloakConfig` configuration object that contains initialization
+   * for keycloak-js adapter and keycloak-angular library.
+   * @return The new keycloak-angular module.
+   */
+  static forChild(options: KeycloakAngularOptions): ModuleWithProviders<KeycloakAngularModule> {
+    return {
+      ngModule: KeycloakAngularModule,
+      providers: [
+        { provide: KEYCLOAK_ANGULAR_OPTIONS, useValue: options },
+        { provide: KEYCLOAK_INSTANCE, useValue: createKeycloakInstance(options) }
+      ]
+    };
+  }
+}
 
-  static forChild(options?: KeycloakOptions): ModuleWithProviders {
-    return {
-      ngModule: KeycloakAngularModule,
-      providers: [
-        {
-          provide: KeycloakConfig,
-          useFactory: options => new KeycloakConfig(options)
-        }
-      ]
-    };
-  }
+/**
+ * The [DI token](guide/glossary/#di-token) for the keycloak-js instance.
+ */
+export const KEYCLOAK_INSTANCE = new InjectionToken<Keycloak.KeycloakInstance>('KEYCLOAK_INSTANCE');
+
+/**
+ * Creates de keycloak instance using the specificied options
+ * @param config An ... TODO:
+ */
+export function createKeycloakInstance({ config }: KeycloakAngularOptions): Keycloak.KeycloakInstance {
+  return Keycloak(config);
 }

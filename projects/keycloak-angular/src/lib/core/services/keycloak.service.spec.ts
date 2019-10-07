@@ -1,77 +1,12 @@
-/**
- * @license
- * Copyright Mauricio Gemelli Vigolo and contributors.
- *
- * Use of this source code is governed by a MIT-style license that can be
- * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
- */
-
 import { TestBed } from '@angular/core/testing';
-
-import * as Keycloak from 'keycloak-js';
 
 import { KeycloakService } from './keycloak.service';
 
 describe('KeycloakService', () => {
-  let keycloakService: KeycloakService;
-  let keycloakInstanceSpy: Keycloak.KeycloakInstance;
+  beforeEach(() => TestBed.configureTestingModule({}));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [KeycloakService]
-    });
-    keycloakService = TestBed.get(KeycloakService);
-    spyOn(keycloakService, 'getKeycloak').and.returnValue(true);
+  it('should be created', () => {
+    const service: KeycloakService = TestBed.get(KeycloakService);
+    expect(service).toBeTruthy();
   });
-
-  it('Should be created', () => {
-    expect(keycloakService).toBeTruthy();
-  });
-
-  it('should initialize the keycloak adapter ', () => {
-    const authenticated = keycloakService.init();
-    console.log('aqui', authenticated);
-    expect(authenticated).toBeUndefined();
-  });
-
-  // describe('#loadExcludedUrls', () => {
-  //   it('Should create the ExcludedUrlRegex objects if the bearerExcludedUrls arg is a string array', inject(
-  //     [KeycloakService],
-  //     (service: KeycloakService) => {
-  //       const loadExcludedUrls = service['loadExcludedUrls'];
-  //       const result = loadExcludedUrls(['home', 'public']);
-  //       let { urlPattern, httpMethods } = result[0];
-
-  //       expect(result.length).toBe(2);
-  //       expect(urlPattern).toBeDefined();
-  //       expect(urlPattern.test('http://url/home')).toBeTruthy();
-  //       expect(httpMethods.length).toBe(0);
-  //     }
-  //   ));
-
-  //   it('Should create the ExcludedUrlRegex objects if the bearerExcludedUrls arg is an mixed array of strings and ExcludedUrl objects', inject(
-  //     [KeycloakService],
-  //     (service: KeycloakService) => {
-  //       const loadExcludedUrls = service['loadExcludedUrls'];
-  //       const result = loadExcludedUrls([
-  //         'home',
-  //         { url: 'public', httpMethods: ['GET'] }
-  //       ]);
-  //       expect(result.length).toBe(2);
-
-  //       let excludedRegex1 = result[0];
-  //       expect(excludedRegex1.urlPattern).toBeDefined();
-  //       expect(excludedRegex1.urlPattern.test('https://url/home')).toBeTruthy();
-  //       expect(excludedRegex1.httpMethods.length).toBe(0);
-
-  //       let excludedRegex2 = result[1];
-  //       expect(excludedRegex2.urlPattern).toBeDefined();
-  //       expect(
-  //         excludedRegex2.urlPattern.test('https://url/public')
-  //       ).toBeTruthy();
-  //       expect(excludedRegex2.httpMethods.length).toBe(1);
-  //       expect(excludedRegex2.httpMethods[0]).toBe('GET');
-  //     }
-  //   ));
-  // });
 });

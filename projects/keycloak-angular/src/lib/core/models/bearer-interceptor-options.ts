@@ -6,33 +6,7 @@
  * found in the LICENSE file at https://github.com/mauriciovigolo/keycloak-angular/LICENSE
  */
 
-/**
- * HTTP Methods
- */
-export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'HEAD' | 'PATCH';
-
-/**
- * ExcludedUrl type may be used to specify the url and the HTTP method that
- * should not be intercepted by the KeycloakBearerInterceptor.
- *
- * Example:
- * const excludedUrl: ExcludedUrl[] = [
- *  {
- *    url: 'reports/public'
- *    httpMethods: ['GET']
- *  }
- * ]
- *
- * In the example above for URL reports/public and HTTP Method GET the
- * bearer will not be automatically added.
- *
- * If the url is informed but httpMethod is undefined, then the bearer
- * will not be added for all HTTP Methods.
- */
-export type UrlMatcher = {
-  url: string;
-  httpMethods?: HttpMethods[];
-};
+import { UrlMatcher } from './shared-types';
 
 export interface BearerInterceptorOption {
   /**
@@ -53,8 +27,11 @@ export interface BearerInterceptorOption {
    */
   urlPattern?: UrlMatcher[];
   /**
-   * Policy type.
-   *
+   * Policy type, meaning the way the bearer interceptor will deal if the urlPattern is matched.
+   * - included means that the BearerInterceptor will only add the Authorization header on those URLs
+   * that were matched.
+   * - excluded means that all HttpClient requests will have the Authorization header, except that
+   * ones that matched the urlPattern.
    * default: excluded
    */
   policyType: 'included' | 'excluded';
