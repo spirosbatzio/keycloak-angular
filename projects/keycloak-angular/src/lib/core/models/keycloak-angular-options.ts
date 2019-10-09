@@ -8,13 +8,6 @@
 
 import { BearerInterceptorOption } from './bearer-interceptor-options';
 import { KeycloakConfig } from './keycloak-config';
-import { InjectionToken } from '@angular/core';
-
-/**
- * The [DI token](guide/glossary/#di-token) for keycloak-angular options
- * configuration.
- */
-export const KEYCLOAK_ANGULAR_OPTIONS = new InjectionToken<KeycloakAngularOptions>('KEYCLOAK_ANGULAR_OPTIONS');
 
 /**
  * keycloak-angular initialization options, provided in the `forRoot()`
